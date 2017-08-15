@@ -5,6 +5,8 @@ usage
 
 ```javascript
 
+const datastore = require('aws-dynamo');
+
 return new Promise((resolve, reject) => {
 
         try {
