@@ -1,25 +1,23 @@
 {
-  "name":            "aws-dynamo",
-  "version":         "1.0.1",
-  "description":     "A wrapper around dynamoDB",
-  "main":            "index.js",
-  "scripts":         {
+  "name": "aws-dynamo",
+  "version": "1.1.0",
+  "description": "A wrapper around dynamoDB",
+  "main": "index.js",
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository":      {
+  "repository": {
     "type": "git",
-    "url":  "git+https://github.com/headforwards-spd/dynamo.git"
+    "url": "git+https://github.com/headforwards-spd/dynamo.git"
   },
-  "author":          "",
-  "license":         "ISC",
-  "bugs":            {
+  "author": "",
+  "license": "ISC",
+  "bugs": {
     "url": "https://github.com/headforwards-spd/dynamo/issues"
   },
   "devDependencies": {
     "aws-sdk": "^2.45.0"
   },
-  "dependencies":    {
-
-  },
-  "homepage":        "https://github.com/headforwards-spd/dynamo#readme"
+  "dependencies": {},
+  "homepage": "https://github.com/headforwards-spd/dynamo#readme"
 }
