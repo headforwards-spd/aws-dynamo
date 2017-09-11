@@ -1,13 +1,16 @@
 const documentClient = require('./documentClient');
 
-module.exports.scan              = scanItems;
-module.exports.list              = listItems;
-module.exports.get               = getItem;
-module.exports.getFirst          = getFirst;
-module.exports.create            = createItem;
-module.exports.update            = updateItem;
-module.exports.delete            = deleteItem;
-module.exports.addUpdateToParams = addUpdateToParams;
+module.exports = {
+    scan:                    scanItems,
+    list:                    listItems,
+    get:                     getItem,
+    getFirst:                getFirst,
+    create:                  createItem,
+    update:                  updateItem,
+    delete:                  deleteItem,
+    addUpdateToParams:       addUpdateToParams,
+    setProjectionExpression: setProjectionExpression
+};
 
 function getFirst(params, resolve, reject) {
 
@@ -37,6 +40,7 @@ function scanItems(params, resolve, reject) {
         reject(new Error(error));
     }
 }
+
 function listItems(params, resolve, reject) {
 
     try {
@@ -115,14 +119,13 @@ function deleteItem(params, resolve, reject) {
     }
 }
 
-
 function addUpdateToParams(update, params) {
 
     let attributeValues = {};
 
     let updateExpression = 'set ' + Object.keys(update).map(key => {
-            return ' ' + key + ' = :' + key;
-        }).join(', ');
+        return ' ' + key + ' = :' + key;
+    }).join(', ');
 
     for (let key in update) {
 
@@ -133,6 +136,20 @@ function addUpdateToParams(update, params) {
     params.ExpressionAttributeValues = attributeValues;
 
     return params;
+}
+
+function setProjectionExpression(params, projectionExpression) {
+
+    !params.hasOwnProperty('ExpressionAttributeNames') && (params.ExpressionAttributeNames = {});
+    !params.hasOwnProperty('ProjectionExpression') && (params.ProjectionExpression = []);
+
+    projectionExpression.map(value => {
+
+        let name = '#' + value;
+
+        params.ExpressionAttributeNames[name] = value;
+        params.ProjectionExpression.push(name);
+    });
 }
 
 function attributeValue(value) {
