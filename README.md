@@ -1,28 +1,38 @@
-# dynamo
-A wrapper around dynamoDB
+# AWS dynamoDb Wrapper
 
-usage
+A handful of utility tools for AWS dynamoDb functions
+
+## Usage:
 
 ```javascript
+const dynamo = require('@headforwards-spd/aws-dynamo');
+```
 
-const datastore = require('aws-dynamo');
+### list()
 
-return new Promise((resolve, reject) => {
+```javascript
+const tableName                 = 'my-table-name';
+const keyConditionExpression    = 'my-key-condition-expression';
+const expressionAttributeValues = 'my-expression-attribute-values';
+
+function listMyItems() {
+
+    return new Promise((resolve, reject) => {
 
         try {
 
             const params = {
-                TableName: 'foo'
-                KeyConditionExpression:    'fooId = :fooId',
-                ExpressionAttributeValues: {':fooId': fooId}
+                TableName:                 tableName,
+                KeyConditionExpression:    keyConditionExpression,
+                ExpressionAttributeValues: expressionAttributeValues
             };
 
-            datastore.list(params, resolve, reject);
+            dynamo.list(params, resolve, reject);
 
         } catch (error) {
 
-            reject(new Error(error));
+            reject(error);
         }
     });
-
+}
 ```
